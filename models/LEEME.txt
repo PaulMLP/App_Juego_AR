@@ -1,0 +1,17 @@
+Coloca aquí tus archivos .glb exportados de Blender.
+
+Deben llamarse exactamente como están referenciados en combinations.json:
+  - cloud.glb
+  - mud.glb
+  - volcano.glb
+  - steam.glb
+
+Recuerda antes de exportar en Blender:
+  1. Selecciona el objeto y aplica todas las transformaciones: Ctrl+A > All Transforms
+  2. File > Export > glTF 2.0 (.glb/.gltf)
+  3. Formato: glTF Binary (.glb)
+  4. Activa "Apply Modifiers"
+  5. Verifica que las texturas queden embebidas en el .glb (no como archivos sueltos)
+
+Si el modelo aparece gigante o microscópico en la app, ajusta el valor
+"scale" del result-anchor correspondiente en index.html (actualmente 0.3 0.3 0.3).

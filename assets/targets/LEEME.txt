@@ -1,0 +1,21 @@
+Aquí debe ir tu archivo targets.mind
+
+Cómo generarlo:
+  1. Toma una foto PLANA y bien iluminada de cada ficha física
+     (evita reflejos/brillos, que se vea toda la ficha, buen contraste)
+  2. Ve al compilador online oficial de MindAR:
+     https://hiukim.github.io/mind-ar-js-doc/tools/compile
+  3. Sube tus fotos EN ESTE ORDEN (importante, define el targetIndex):
+        Foto 1 -> Lluvia (targetIndex 0)
+        Foto 2 -> Agua   (targetIndex 1)
+        Foto 3 -> Tierra (targetIndex 2)
+        Foto 4 -> Fuego  (targetIndex 3)
+  4. Compila y descarga el archivo "targets.mind"
+  5. Colócalo en esta misma carpeta (assets/targets/targets.mind)
+
+Si agregas más fichas base en el futuro, súbelas también al compilador
+en el mismo lote (el orden en que las subas = su targetIndex), y actualiza
+combinations.json y las a-entity en index.html para que coincidan.
+
+Guarda tus fotos originales en assets/card-photos/ por si necesitas
+recompilar más adelante.

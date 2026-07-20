@@ -1,0 +1,31 @@
+{
+  "cards": {
+    "0": "lluvia",
+    "1": "agua",
+    "2": "tierra",
+    "3": "fuego"
+  },
+  "combinations": [
+    {
+      "pair": ["lluvia", "tierra"],
+      "id": "plant",
+      "name": "Planta",
+      "description": "El lluvia y la tierra se combinan para formar una planta.",
+      "model": "./models/planta.glb"
+    },
+    {
+      "pair": ["agua", "tierra"],
+      "id": "lodo",
+      "name": "Lodo",
+      "description": "El agua y la tierra se combinan para formar lodo.",
+      "model": "./models/lodo.glb"
+    },
+    {
+      "pair": ["fuego", "tierra"],
+      "id": "lava",
+      "name": "Lava",
+      "description": "El fuego y la tierra se combinan para formar lava.",
+      "model": "./models/lava.glb"
+    }
+  ]
+}
