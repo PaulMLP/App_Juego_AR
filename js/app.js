@@ -143,9 +143,19 @@ let growStartTime = 0;
 function updateStagePosition() {
   if (currentCombo && visibleTargets.size === 2) {
     const [i1, i2] = [...visibleTargets];
-    const anchorIndex = Math.min(i1, i2);
-    const otherIndex = Math.max(i1, i2);
+    const ANCHOR_CARD_NAME = 'tierra'; // ficha común a todas las combinaciones
+    const anchorCardIndex = Number(
+      Object.keys(combosData.cards).find((k) => combosData.cards[k] === ANCHOR_CARD_NAME)
+    );
 
+    let anchorIndex, otherIndex;
+    if (i1 === anchorCardIndex || i2 === anchorCardIndex) {
+      anchorIndex = anchorCardIndex;
+      otherIndex = i1 === anchorCardIndex ? i2 : i1;
+    } else {
+      anchorIndex = Math.min(i1, i2);
+      otherIndex = Math.max(i1, i2);
+    }
     const anchorObj = document.getElementById(`target-${anchorIndex}`).object3D;
     const otherObj = document.getElementById(`target-${otherIndex}`).object3D;
 
@@ -161,7 +171,7 @@ function updateStagePosition() {
 
     // Convertido a espacio LOCAL de la ficha ancla (así hereda su escala/rotación)
     const localPos = anchorObj.worldToLocal(midWorld);
-    localPos.y += 0.25;
+    localPos.y += 0.15;
     localPos.y += Math.sin(Date.now() * 0.002) * 0.03;
     stageEl.object3D.position.copy(localPos);
 
