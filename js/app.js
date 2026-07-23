@@ -11,7 +11,7 @@ const visibleTargets = new Set(); // índices de fichas actualmente visibles en 
 
 const sceneEl = document.querySelector('a-scene');
 const stageEl = document.getElementById('result-stage');
-stageEl.object3D.rotation.x = Math.PI / 3;
+stageEl.object3D.rotation.x = Math.PI / 2.2; // ~82°, casi vertical
 
 stageEl.addEventListener('model-loaded', (e) => {
   console.log('✅ Modelo 3D cargado correctamente:', e.detail);
@@ -176,7 +176,7 @@ function updateStagePosition() {
     // Efecto de "crecer" al aparecer
     const elapsed = Date.now() - growStartTime;
     const growProgress = Math.min(elapsed / 400, 1);
-    const SIZE_MULTIPLIER = 0.3;
+    const SIZE_MULTIPLIER = 0.4;
     stageEl.object3D.scale.setScalar(growProgress * SIZE_MULTIPLIER);
     if (!currentCombo.animated) {
       stageEl.object3D.rotation.y += 0.005; // giro lento continuo, solo si no tiene animación propia
