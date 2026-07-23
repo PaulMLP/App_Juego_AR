@@ -11,7 +11,8 @@
       "id": "plant",
       "name": "Planta",
       "description": "El lluvia y la tierra se combinan para formar una planta.",
-      "model": "./models/planta.glb"
+      "model": "./models/planta.glb",
+      "animated": true
     },
     {
       "pair": ["agua", "tierra"],

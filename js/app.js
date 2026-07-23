@@ -11,6 +11,7 @@ const visibleTargets = new Set(); // índices de fichas actualmente visibles en 
 
 const sceneEl = document.querySelector('a-scene');
 const stageEl = document.getElementById('result-stage');
+stageEl.object3D.rotation.x = Math.PI / 3;
 
 stageEl.addEventListener('model-loaded', (e) => {
   console.log('✅ Modelo 3D cargado correctamente:', e.detail);
@@ -91,21 +92,18 @@ function showResult(combo) {
     // Efecto de "crecer" al aparecer
     growStartTime = Date.now();
 
-    // Rotación lenta continua (idle) — se puede quitar por modelo si no la quieres
-    stageEl.setAttribute('animation__rotate', {
-      property: 'rotation',
-      to: '0 360 0',
-      loop: true,
-      dur: 9000,
-      easing: 'linear',
-    });
-
     // Si el .glb trae animación propia (ej. hojas moviéndose, erupción, etc.),
     // esto la reproduce automáticamente en loop. Si el modelo no tiene
     // animaciones embebidas, este atributo simplemente no hace nada.
-    // stageEl.setAttribute('animation-mixer', 'clip: *; loop: repeat;');
+    stageEl.setAttribute('animation-mixer', 'clip: *; loop: repeat;');
 
     showBanner(combo.name, combo.description);
+    // Si esta página corre dentro del WebView de la app Flutter, le avisa
+    // qué combinación se detectó para que registre puntos/historial.
+    // Si se abre en un navegador normal, este bloque simplemente no hace nada.
+    if (window.FichasArBridge) {
+      window.FichasArBridge.postMessage(JSON.stringify({ comboId: combo.id }));
+    }
   }
 }
 
@@ -178,7 +176,11 @@ function updateStagePosition() {
     // Efecto de "crecer" al aparecer
     const elapsed = Date.now() - growStartTime;
     const growProgress = Math.min(elapsed / 400, 1);
-    stageEl.object3D.scale.setScalar(growProgress);
+    const SIZE_MULTIPLIER = 0.3;
+    stageEl.object3D.scale.setScalar(growProgress * SIZE_MULTIPLIER);
+    if (!currentCombo.animated) {
+      stageEl.object3D.rotation.y += 0.005; // giro lento continuo, solo si no tiene animación propia
+    }
   }
   requestAnimationFrame(updateStagePosition);
 }
